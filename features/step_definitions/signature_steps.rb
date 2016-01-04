@@ -194,3 +194,6 @@ Then /^the signature count (?:stays at|goes up to) (\d+)$/ do |number|
   expect(signatures.count).to eq number
 end
 
+Given(/^a blacklisted domain "(.*?)"$/) do |name|
+  FactoryGirl.create(:domain, :blocked, name: name)
+end
