@@ -321,4 +321,18 @@ FactoryGirl.define do
   factory :email_sent_receipt do
     association :signature, factory: :validated_signature
   end
+
+  factory :domain do
+    name { Faker::Internet.domain_name }
+
+    trait :allowed do
+      state 'allow'
+      resolved_at { Time.current }
+    end
+
+    trait :blocked do
+      state 'block'
+      resolved_at { Time.current }
+    end
+  end
 end
