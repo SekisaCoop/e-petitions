@@ -55,9 +55,11 @@ Rails.application.configure do
   config.lograge.enabled = true
 
   # Log in logstash format, so that we can easily parse the output
-  config.logger = LogStashLogger.new(
-    uri: ENV.fetch('LOGSTASH_URI') { 'file://' + Rails.root.join('log', 'production.log').to_s }
-  )
+  unless ENV['LOGS_USE_DEFAULT'].present?
+    config.logger = LogStashLogger.new(
+      uri: ENV.fetch('LOGSTASH_URI') { 'file://' + Rails.root.join('log', 'production.log').to_s }
+    )
+  end
 
   # Prepend all log lines with the following tags.
   # config.log_tags = [ :subdomain, :uuid ]
