@@ -104,17 +104,18 @@ Rails.application.configure do
   # We also don't want to have to get an 'assets.domainname.example' SSL
   # certificate, so instead we proxy requests from the frontend webservers for
   # any url that starts with /attachments/ to the S3 bucket
-
-  config.paperclip_defaults = {
-    storage: :fog,
-    fog_directory: ENV.fetch('UPLOADED_IMAGES_S3_BUCKET'),
-    fog_credentials: {
-      use_iam_profile: true,
-      provider: 'AWS',
-      region: 'eu-west-1',
-      scheme: 'https'
-    },
-    # Proxied to S3 via the webserver
-    fog_host: '/attachments'
-  }
+  unless ENV['PAPERCLIP_USE_FILESYSTEM'].present?
+    config.paperclip_defaults = {
+      storage: :fog,
+      fog_directory: ENV.fetch('UPLOADED_IMAGES_S3_BUCKET'),
+      fog_credentials: {
+        use_iam_profile: true,
+        provider: 'AWS',
+        region: 'eu-west-1',
+        scheme: 'https'
+      },
+      # Proxied to S3 via the webserver
+      fog_host: '/attachments'
+    }
+  end
 end
