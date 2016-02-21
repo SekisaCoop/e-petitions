@@ -34,4 +34,4 @@ test:
 
 production:
   <<: *defaults
-  active: true
+  active: <%= ENV.fetch('ENABLE_APPSIGNAL', 'true').downcase == 'true' %>
