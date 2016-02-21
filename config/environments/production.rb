@@ -42,7 +42,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = 'X-Accel-Redirect' # for NGINX
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = ENV.fetch('FORCE_SSL', true)
+  config.force_ssl = ENV.fetch('FORCE_SSL', 'true').downcase == 'true'
 
   # Set the HSTS headers to include subdomains
   config.ssl_options[:hsts] = { expires: 365.days, subdomains: true }
