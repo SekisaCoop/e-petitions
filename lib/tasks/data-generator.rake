@@ -37,10 +37,9 @@ namespace :data do
             uk_citizenship: '1',
             name: Faker::Name.name,
             email: Faker::Internet.safe_email,
-            country: 'United Kingdom',
+            location_code: 'GB',
             state: 'validated',
             postcode: POSTCODES.sample
-
           })
         })
 
@@ -51,7 +50,7 @@ namespace :data do
             uk_citizenship: '1',
             name: Faker::Name.name,
             email: Faker::Internet.safe_email("#{Faker::Lorem.characters(rand(10..40))}-#{rand(1..999999)}"),
-            country: 'United Kingdom',
+            location_code: 'GB',
             state: 'validated',
             postcode: POSTCODES.sample
           )
@@ -91,7 +90,7 @@ namespace :data do
             uk_citizenship: '1',
             name: Faker::Name.name,
             email: Faker::Internet.safe_email("#{Faker::Lorem.characters(rand(10..40))}-#{rand(1..999999)}"),
-            country: 'United Kingdom',
+            location_code: 'GB',
             postcode: POSTCODES.sample
           )
           signature.validate!
